@@ -29,8 +29,8 @@ Every seven hours, the script selects a message from its internal pool and sends
 ### Local persistence
 Two persistent keys are stored in localStorage:
 
-``last_sent`` — timestamp of the initial message.     
-``followup_sent`` — marker for either a received reply or a delivered follow-up.  
+``last_sent`` - timestamp of the initial message.     
+``followup_sent`` - marker for either a received reply or a delivered follow-up.  
 This allows the script to resume seamlessly after navigation or reloads without losing its place in the cycle.
 
 ### Structured reply detection
