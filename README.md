@@ -1,74 +1,75 @@
 # Lazy Streak Keeper
-A lightweight Tampermonkey userscript that automatically maintains KoGaMa chat streaks by posting timed messages, waiting for replies, and issuing follow-up messages when necessary. All activity is persisted locally so it survives page reloads.
+
+A focused and self-contained Tampermonkey userscript that automates KoGaMa chat streak keeping through timed outbound messages, delayed reply checks, and conditional follow-up dispatching, all with persistent state stored locally.
 
 ---
 
 ## Requirements
 
-1. A browser with Tampermonkey (or a compatible userscript manager) installed.  
-2. A logged-in KoGaMa session in the same browser.  
-3. You must have the [Streak Keeper](https://www.kogama.com/profile/670350173) account befriended.
-     > if you're hosting a bot to respond to you in your own environment, edit ``TARGET_PROFILE`` to be the UID of the account you use.
-  
-5. The script must be edited to set the correct chat user id:  
+1. A browser with Tampermonkey (or any userscript-capable extension).  
+2. An active and logged-in KoGaMa session in that browser.  
+3. The account acting as the Streak Keeping Bot must be befriended with your account.  
+   > If you use a dedicated bot or alternate account, set `TARGET_PROFILE` to that profile’s UID.    
+   > On KoGaMa WWW the automated bot made by [Awxi](https://github.com/wowizowiii) is called [Streak Keeper](https://www.kogama.com/profile/670350173/)   
+4. Set the correct sender UID inside the script:
 
    ```javascript
-   const USERID = 'PUT_USERID_HERE';
-   ```   
-    > User ID is contained within your profile URL, like this:   
-    ``kogama.com/profile/670350173/``, In ths case `670350173` is the User ID we'd require if it was our account.
+   const USERID = '12345';
+   ```
+   > Your User ID is the numeric segment found in your profile URL:   
+     Example: ``https://www.kogama.com/profile/670350173/``   
+     In this case, the UID is ``670350173``.
 
 ---
 
 ## Features
-### Automated streak maintenance
-
-The script sends a randomly selected message once every seven hours. A reply is expected from the streak keeper profile. If no reply arrives within two minutes, the script sends a follow-up message automatically.
+### Timed streak upkeep
+Every seven hours, the script selects a message from its internal pool and sends it to the target profile. It then waits for a reply and, if none appears, transmits an additional follow-up after the grace period elapses.
 
 ### Local persistence
+Two persistent keys are stored in localStorage:
 
-Two values are stored in localStorage:
+``last_sent`` — timestamp of the initial message.     
+``followup_sent`` — marker for either a received reply or a delivered follow-up.  
+This allows the script to resume seamlessly after navigation or reloads without losing its place in the cycle.
 
-``last_sent`` tracks when the initial message was sent.
+### Structured reply detection
+After each message dispatch, the script polls the KoGaMa chat history. It inspects the most recent entry and verifies whether it originated from the designated partner profile. The follow-up is only sent if no matching reply is observed.
 
-``followup_sent`` records whether a follow-up was issued or a reply was received.
+### Message variation
+The ``MESSAGES`` array defines a rotation pool of preset phrases. You may expand, refine, or fully replace this list without affecting core behaviour.
 
-This guarantees uninterrupted operation even if the page reloads.
+---
 
-### Response polling
+##Installation
 
-After sending a message, the script polls the chat endpoint every five seconds for up to two minutes. A reply from the target profile is detected by comparing timestamps.
-
-### Randomized messages
-
-A built-in array of message templates ensures variation in communication. Users may modify or expand this list directly in the script.
-
---- 
-## Installation
-
-1. Open Tampermonkey, create a new script.
-2. Paste the content from the automatic streak keeper userscript file.
-3. Replace the value of ``USERID`` with your own user ID.
+1. Open Tampermonkey and create a new script.
+2. Paste the userscript source into the new file.
+3. Set your own UID in the ``USERID`` constant.
 4. Save and enable the script.
-5. Visit any KoGaMa page to allow it to run.
+5. Navigate to any KoGaMa page to allow execution.
 
 ---
 
 ## Customisation
-You may adjust behaviour in the script:
+The script can be tuned by adjusting the following values:
 
-- Message templates: modify the ``MESSAGES`` array
-- Delay before follow-up: adjust ``RESPONSE_WAIT_MS``
-- Polling frequency: modify ``POLL_INTERVAL_MS``
-- Streak interval: change ``SEVEN_HOURS_MS``
-
----
-
-## Security Notice
-The script performs requests using your active KoGaMa login session (credentials: 'include').
-Do not run it in an untrusted browser environment and never share your session.
+``MESSAGES`` - message pool   
+``RESPONSE_WAIT_MS`` - reply wait duration   
+``POLL_INTERVAL_MS`` - interval between history checks   
+``SEVEN_HOURS_MS`` - full streak interval  
 
 --- 
 
-## License
-Free to use, modify, and adapt without restriction.
+## Security Notice
+All requests are made under your authenticated KoGaMa session via credentials: "include".
+Avoid running this script in an untrusted environment and never share your session cookies or modified builds.
+
+---
+
+# License
+Permission is granted for personal, private, and unrestricted use of this software, including modification and adaptation, provided that redistribution of the script or any derivative work is not permitted in any public or commercial form.  
+You may not publish, republish, repost, mirror, sublicense, sell, or distribute this software or modified versions of it.    
+You may not include it in any package, repository, compilation, or automated distribution system.   
+Use is allowed exclusively for individual, non-commercial, and non-public purposes.    
+All rights not expressly granted remain with the [author](https://github.com/midweststatic).    
