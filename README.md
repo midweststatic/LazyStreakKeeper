@@ -62,7 +62,7 @@ The script can be tuned by adjusting the following values:
 --- 
 
 ## Security Notice
-All requests are made under your authenticated KoGaMa session via credentials: "include".
+All requests are made under your authenticated KoGaMa session via credentials: "``include``".   
 Avoid running this script in an untrusted environment and never share your session cookies or modified builds.
 
 ---
