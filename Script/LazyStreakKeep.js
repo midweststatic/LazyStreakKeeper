@@ -11,7 +11,7 @@
 
 
 // General config
-const USERID = '24051519'; // Edit this value to be your own UID.
+const USERID = '000000'; // Edit this value to be your own UID.
 const TARGET_PROFILE = 670350173;
 
 const LAST_SENT_KEY = 'last_sent';
