@@ -57,7 +57,7 @@ The script can be tuned by adjusting the following values:
 ``MESSAGES`` - message pool   
 ``RESPONSE_WAIT_MS`` - reply wait duration   
 ``POLL_INTERVAL_MS`` - interval between history checks   
-``SEVEN_HOURS_MS`` - full streak interval  
+``MESSAGE_INTERVAL_MS`` - full streak interval  
 
 --- 
 
@@ -67,9 +67,22 @@ Avoid running this script in an untrusted environment and never share your sessi
 
 ---
 
-# License
-Permission is granted for personal, private, and unrestricted use of this software, including modification and adaptation, provided that redistribution of the script or any derivative work is not permitted in any public or commercial form.  
-You may not publish, republish, repost, mirror, sublicense, sell, or distribute this software or modified versions of it.    
-You may not include it in any package, repository, compilation, or automated distribution system.   
-Use is allowed exclusively for individual, non-commercial, and non-public purposes.    
-All rights not expressly granted remain with the [author](https://github.com/midweststatic).    
+## License
+
+```txt
+Non-Redistributable Personal Use License (NRPUL)
+
+Permission is granted to use, modify, and maintain private copies of this software for personal,
+non-commercial purposes.
+
+Redistribution of the software, in original or modified form, is strictly prohibited. This includes,
+but is not limited to:
+- public reposting,
+- publication in repositories,
+- mirroring,
+- repackaging,
+- sublicensing,
+- inclusion in compilations or automated distribution systems.
+
+You may not share derivative works or expose the script in any public-facing context.   
+All rights not expressly granted remain with the author (https://github.com/midweststatic).
