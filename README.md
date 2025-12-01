@@ -41,7 +41,7 @@ The ``MESSAGES`` array defines a rotation pool of preset phrases. You may expand
 
 ---
 
-##Installation
+## Installation
 
 1. Open Tampermonkey and create a new script.
 2. Paste the userscript source into the new file.
